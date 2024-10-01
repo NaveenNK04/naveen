@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D  Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgb(223, 240, 244); /* Black background */
+            font-family: Arial, sans-serif;
+        }
+        .calculator {
+            border: 3px solid #ccc;
+            border-radius: 20px;
+            padding: 30px;
+            background-color: #00253a; /* Gray calculator */
+            box-shadow: 0 0 20px rgb(0, 0, 0);
+            width: 350px; /* Adjusted width */
+        }
+        #display {
+            width: 100%;
+            height: 90px;
+            margin-bottom: 20px;
+            text-align: right;
+            font-size: 32px;
+            background-color: #201c1c; /* Darker background for display */
+            color: rgb(255, 255, 255); /* White text color */
+            border: none;
+            border-radius: 20px;
+        }
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #011b25; /* Gray button */
+            color: white; /* White text color */
+            flex: 1;
+            margin: 0 5px;
+            transition: background-color 0.3s, transform 0.1s, box-shadow 0.1s;
+            height: 60px; /* Fixed height for square buttons */
+            box-shadow: 0 5px 0 rgba(0, 0, 0, 0.3), 
+                        0 10px 10px rgba(0, 0, 0, 0.5); /* 3D effect */
+        }
+        button:hover {
+            background-color: hsl(198, 46%, 25%); /* Lighter gray on hover */
+            transform: translateY(-2px); /* Lift effect on hover */
+            box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2), 
+                        0 6px 6px rgba(0, 0, 0, 0.5); /* Adjust shadow on hover */
+        }
+        .button-symbol {
+            background-color: #444; /* Different color for symbols */
+        }
+        .button-symbol:hover {
+            background-color: #666; /* Lighter gray on hover for symbols */
+        }
+        .row:last-child {
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        
+        <div class="row">
+            <button onclick="clearDisplay()">AC</button>
+            <button onclick="deleteLast()">Del</button>
+        </div>
+        
+        <div class="row">
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button class="button-symbol" onclick="appendToDisplay('/')">/</button>
+        </div>
+        
+        <div class="row">
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button class="button-symbol" onclick="appendToDisplay('*')">*</button>
+        </div>
+        
+        <div class="row">
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button class="button-symbol" onclick="appendToDisplay('-')">-</button>
+        </div>
+        
+        <div class="row">
+            <button onclick="appendToDisplay('0')">0</button>
+            <button class="button-symbol" onclick="calculateResult()">=</button>
+            <button class="button-symbol" onclick="appendToDisplay('+')">+</button>
+        </div>
+    </div>
+
+    <script>
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function deleteLast() {
+            const display = document.getElementById('display');
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculateResult() {
+            const display = document.getElementById('display');
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
+
